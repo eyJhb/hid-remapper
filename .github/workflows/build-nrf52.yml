@@ -37,9 +37,10 @@ jobs:
       - name: Generate DFU package
         run: |
           docker run -v $PWD:/workdir/project -w /workdir/project/firmware-bluetooth \
-            --entrypoint='["nrfutil", "toolchain-manager", "launch", "/bin/bash", "--", "-c"]' \
+            --entrypoint=nrfutil \
             nordicplayground/nrfconnect-sdk:v2.2-branch \
-            "nrfutil install nrf5sdk-tools && nrfutil pkg generate --hw-version 52 --sd-req=0x00 --application build/zephyr/remapper.hex --application-version 1 remapper.zip"
+            toolchain-manager launch /bin/bash -- -c \
+            "nrfutil install nrf5sdk-tools && nrfutil pkg generate --hw-version 52 --sd-req=0x00 --application build/zephyr/remapper.hex --application-version 1 remapper.zip" \
           cp firmware-bluetooth/remapper.zip firmware-bluetooth/remapper_nrf52840dongle.zip
       - uses: actions/upload-artifact@v4
         with:
