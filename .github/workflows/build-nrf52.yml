@@ -24,12 +24,8 @@ jobs:
             nordicplayground/nrfconnect-sdk:v2.2-branch \
             toolchain-manager launch /bin/bash -- -c \
             "nrfutil install nrf5sdk-tools && nrfutil pkg generate --hw-version 52 --sd-req=0x00 --application build/zephyr/remapper.hex --application-version 1 remapper.zip" \
-          echo $PWD \
-          ls -al firmware-bluetooth \
-          cp firmware-bluetooth/remapper.zip firmware-bluetooth/remapper_nrf52840dongle.zip \
-          ls -al firmware-bluetooth 
-      - name: Generate DFU package
-        run: find . -iname '*.zip'
+      - name: Rename DFU Package
+        run: cp firmware-bluetooth/remapper.zip firmware-bluetooth/remapper_nrf52840dongle.zip
       - uses: actions/upload-artifact@v4
         with:
           name: artifact-nrf52840dongle_nrf52840
