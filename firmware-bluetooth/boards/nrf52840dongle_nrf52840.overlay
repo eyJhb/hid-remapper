@@ -4,3 +4,11 @@
         led1 = &led1_blue;
     };
 };
+
+&reg1 {
+    regulator-initial-mode = <NRF5X_REG_MODE_LDO>;
+};
+
+&reg0 {
+    regulator-initial-mode = <NRF5X_REG_MODE_LDO>;
+};
